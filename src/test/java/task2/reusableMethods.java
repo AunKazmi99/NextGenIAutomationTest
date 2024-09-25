@@ -2,7 +2,7 @@ package task2;
 
 import com.aventstack.extentreports.ExtentTest;
 import io.restassured.path.json.JsonPath;
-import org.hamcrest.Matcher;
+import org.testng.Assert;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -11,12 +11,12 @@ public class reusableMethods {
         return new JsonPath(response);
     }
 
-    public static void validateAssertion(ExtentTest test, Object actual, Matcher<Object> matcher, String message) {
+    public static void validateAssertion(ExtentTest test, Object actual, Object expected, String fieldName) {
         try {
-            assertThat(message, actual, matcher);
-            test.pass(message + " - validation successful.");
+            Assert.assertEquals(actual, expected, fieldName + " - Expected: [" + expected + "], Found: [" + actual + "]");
+            test.pass(fieldName + " is " + actual + " and it matches.");
         } catch (AssertionError e) {
-            test.fail(message + " - validation failed: " + e.getMessage());
+            test.fail(fieldName + " is " + actual + " and it does not match. " + e.getMessage());
         }
     }
 }
