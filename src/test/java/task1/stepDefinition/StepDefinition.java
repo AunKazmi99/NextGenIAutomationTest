@@ -33,7 +33,10 @@ public class StepDefinition {
         options.setBinary("C:\\Users\\AunAbbas\\Downloads\\chrome-win64\\chrome-win64\\chrome.exe");
         options.addArguments("--user-data-dir=C:\\Users\\AunAbbas\\AppData\\Local\\Google\\Chrome for Testing\\User Data\\");
         options.addArguments("--profile-directory=Default");
-
+        //Binary is Set and particular Profile is opened because when opening a fresh browser, Amazon website gave captcha
+        //So I created an account of amazon and opened profile so that I can land on the page
+        //Binary is set because Opening profile was causing error with the Chrome browser of the system
+        //So you need to have Chrome for Testing in the system along with chromedriver and replace the .exe paths above
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
